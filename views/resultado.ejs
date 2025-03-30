@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da Consulta</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado da Consulta</h1>
+        
+        <% if (empresa) { %>
+            <div class="result">
+                <h2><%= empresa.nome %></h2>
+                <h2><%= empresa.razao_social %></h2>
+                <p><strong>CNPJ:</strong> <%= empresa.estabelecimento.cnpj %></p>
+                <p><strong>Data de Abertura:</strong> <%= empresa.estabelecimento.data_inicio_atividade %></p>
+                <p><strong>Tipo:</strong> <%= empresa.estabelecimento.tipo %></p>
+                <p><strong>Porte:</strong> <%= empresa.porte.descricao %></p>
+                <p><strong>Natureza Jurídica:</strong> <%= empresa.natureza_juridica.descricao %></p>
+                
+                <h3>Endereço</h3>
+                <p><%= empresa.estabelecimento.tipo_logradouro %> <%= empresa.estabelecimento.logradouro %>, <%= empresa.estabelecimento.numero %></p>
+                <p><%= empresa.estabelecimento.bairro %></p>
+                <p><%= empresa.estabelecimento.cidade.nome %> - <%= empresa.estabelecimento.estado.sigla %></p>
+                <p>CEP: <%= empresa.estabelecimento.cep %></p>
+                
+                <h3>Contato</h3>
+                <p><strong>Telefone:</strong> (<%= empresa.estabelecimento.ddd1 %>) <%= empresa.estabelecimento.telefone1 %></p>
+                <p><strong>Email:</strong> <%= empresa.estabelecimento.email %></p>
+                
+                <h3>Atividade Principal</h3>
+                <p><%= empresa.estabelecimento.atividade_principal.descricao %></p>
+            </div>
+        <% } else { %>
+            <div class="error">
+                <p><%= erro %></p>
+            </div>
+        <% } %>
+        
+        <a href="/" class="back-button">Nova Consulta</a>
+    </div>
+</body>
+</html>

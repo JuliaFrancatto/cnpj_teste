@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de CNPJ</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de CNPJ</h1>
+        <form action="/consultar" method="POST">
+            <div class="form-group">
+                <label for="cnpj">Digite o CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" 
+                       placeholder="00.000.000/0000-00" required
+                       pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}">
+            </div>
+            <button type="submit">Consultar</button>
+        </form>
+    </div>
+
+    <script>
+        // Máscara para o CNPJ
+        document.getElementById('cnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 12) {
+                value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2}).*/, '$1.$2.$3/$4-$5');
+            } else if (value.length > 8) {
+                value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4}).*/, '$1.$2.$3/$4');
+            } else if (value.length > 5) {
+                value = value.replace(/^(\d{2})(\d{3})(\d{3}).*/, '$1.$2.$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{3}).*/, '$1.$2');
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
